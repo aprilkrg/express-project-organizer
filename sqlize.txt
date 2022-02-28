@@ -1,0 +1,21 @@
+sequelize model:generate --name=category --attributes name:string
+
+sequelize model:generate --name=categoriesProjects --attributes categoryId:integer,projectId:integer
+
+
+https://sequelize.org/v7/manual/query-interface.html
+
+ALTER TABLE categories ADD "projectId" INTEGER REFERENCES projects(id);
+ALTER TABLE projects ADD "categoryId" INTEGER REFERENCES categories(id);
+
+ALTER TABLE categories DROP COLUMN "projectId";
+ALTER TABLE projects DROP COLUMN "categoryId";
+
+SELECT id
+FROM categories
+JOIN projects
+ON categories.id="projects.categoryId"
+;
+
+ALTER TABLE "categoriesProjects" DROP COLUMN "productId";
+ALTER TABLE "categoriesProjects" ADD "projectId" INTEGER REFERENCES projects(id);

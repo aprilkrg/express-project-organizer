@@ -1,0 +1,8 @@
+<h2>My Categories</h2>
+<hr>
+<% if (foundCat) { %>
+    <h2><%= foundCat.name %></h2>
+    <% foundCat.projects.forEach(projectEl => { %>
+        <li><%= projectEl.name %> </li>
+    <% }) %>
+<% } %>

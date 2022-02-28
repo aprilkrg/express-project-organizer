@@ -1,0 +1,11 @@
+<h2>My Categories</h2>
+<hr>
+
+<% if (allCats) { %>
+    <% allCats.forEach(categoryEl => { %>
+        <p><%= categoryEl.name %> </p>
+        <% categoryEl.projects.forEach(element => { %>
+         <li><%= element.name %></li>
+        <% }) %>
+    <% }) %>
+<% } %>

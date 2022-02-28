@@ -8,9 +8,14 @@ router.post('/', (req, res) => {
     name: req.body.name,
     githubLink: req.body.githubLink,
     deployLink: req.body.deployedLink,
-    description: req.body.description
+    description: req.body.description,
+    category: req.body.category
   })
   .then((project) => {
+    const newCategory = db.category.findOrCreate({
+      name: project.category
+    })
+    project.addCategory(newCategory)
     res.redirect('/')
   })
   .catch((error) => {
