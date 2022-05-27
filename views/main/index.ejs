@@ -1,14 +1,18 @@
-<h1>Project Organizer</h1>
+<!-- <h1>Project Organizer</h1>
 
-<h2>My Projects</h2>
-<hr>
+<h2>My Projects</h2> -->
+
 
 <% if (projects.length < 1) { %>
   <h4>Better get coding, I've no projects!</h4>
 <% } %>
 
 <% projects.forEach(function(project) { %>
-  <div class="well">
+  <div class="
+    flex justify-center
+    bg-amber-50 hover:bg-amber-200
+    py-3
+  ">
     <h2>
       <a href="/projects/<%= project.id %>"><%= project.name %></a>
     </h2>
