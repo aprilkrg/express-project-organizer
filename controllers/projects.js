@@ -11,8 +11,16 @@ router.post("/", async (req, res) => {
       deployLink: req.body.deployedLink,
       description: req.body.description
     })
+    const [category] = await db.category.findOrCreate({
+      where: {
+        name: req.body.category
+      }
+    })
+    // await category.addProject(newProject)
+    await newProject.addCategory(category)
     res.redirect("/")
   } catch(err) {
+    console.log("ERROR", err)
     res.status(400).render("main/404")
   }
 })
