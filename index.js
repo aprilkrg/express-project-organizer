@@ -10,6 +10,7 @@ rowdy.begin(app)
 // MIDDLEWARE
 app.set('view engine', 'ejs')
 app.use(require('morgan')('dev'))
+// parse body from form requests
 app.use(express.urlencoded({ extended: false }))
 
 
@@ -17,15 +18,14 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/projects', require('./controllers/projects'))
 
 // ROUTES
-app.get('/', (req, res) => {
-  db.project.findAll()
-  .then((projects) => {
-    res.render('main/index', { projects: projects })
-  })
-  .catch((error) => {
-    console.log('Error in GET /', error)
-    res.status(400).render('main/404')
-  })
+app.get("/", async (req, res) => {
+  try {
+     const allProjects = await db.project.findAll()
+     res.render("main/index", {projects: allProjects})
+  } catch(err) {
+    console.log("Error in GET /", err)
+    res.status(400).render("main/404")
+  }
 })
 
 app.get('*', (req, res) => {
@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
 })
 
 // LISTENER
-app.listen(PORT, function() {
+app.listen(PORT, () => {
   rowdy.print()
   console.log(`listening on port: ${PORT}`)
 })
