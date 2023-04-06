@@ -1,20 +1,19 @@
-<!-- <h1>Project Organizer</h1>
+<%- include("../partials/header.ejs") %>
 
-<h2>My Projects</h2> -->
 
+
+<h2>My Projects</h2>
 
 <% if (projects.length < 1) { %>
   <h4>Better get coding, I've no projects!</h4>
 <% } %>
 
 <% projects.forEach(function(project) { %>
-  <div class="
-    flex justify-center
-    bg-amber-50 hover:bg-amber-200
-    py-3
-  ">
+  <div class="well">
     <h2>
       <a href="/projects/<%= project.id %>"><%= project.name %></a>
     </h2>
   </div>
 <% }); %>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,17 +1,22 @@
+// VARIABLES & PACKAGES
 const express = require('express')
-const ejsLayouts = require('express-ejs-layouts')
 const db = require('./models')
 const rowdy = require('rowdy-logger')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 rowdy.begin(app)
 
+// MIDDLEWARE
 app.set('view engine', 'ejs')
 app.use(require('morgan')('dev'))
 app.use(express.urlencoded({ extended: false }))
-app.use(ejsLayouts)
 
+
+// CONTROLLERS
+app.use('/projects', require('./controllers/projects'))
+
+// ROUTES
 app.get('/', (req, res) => {
   db.project.findAll()
   .then((projects) => {
@@ -23,12 +28,11 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/projects', require('./controllers/projects'))
-
 app.get('*', (req, res) => {
   res.render('main/404')
 })
 
+// LISTENER
 app.listen(PORT, function() {
   rowdy.print()
   console.log(`listening on port: ${PORT}`)
