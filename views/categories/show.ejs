@@ -1,0 +1,14 @@
+<%- include("../partials/header.ejs") %>
+
+<h2><%= category.name %></h2>
+<p>Projects:</p>
+<ul>
+    <% category.projects.forEach(project => { %>
+        <li><a href="/projects/<%= project.id %>"><%= project.name %></a></li>
+    <% }) %>
+</ul>
+
+<hr />
+<a href="/">&larr; Back Home</a>
+
+<%- include("../partials/footer.ejs") %>
