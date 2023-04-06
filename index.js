@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // CONTROLLERS
 app.use("/projects", require("./controllers/projects"))
+app.use("/categories", require("./controllers/categories"))
 
 // ROUTES
 app.get("/", async (req, res) => {
