@@ -2,7 +2,7 @@ let express = require("express")
 let db = require("../models")
 let router = express.Router()
 
-// POST /projects - create a new project
+// http POST url /projects - creates a new project
 router.post("/", async (req, res) => {
   try{
     const newProject = await db.project.create({
@@ -16,7 +16,6 @@ router.post("/", async (req, res) => {
         name: req.body.category
       }
     })
-    // await category.addProject(newProject)
     await newProject.addCategory(category)
     res.redirect("/")
   } catch(err) {
@@ -25,12 +24,12 @@ router.post("/", async (req, res) => {
   }
 })
 
-// GET /projects/new - display form for creating a new project
+// http GET url /projects/new - view form for creating a new project
 router.get("/new", (req, res) => {
   res.render("projects/new")
 })
 
-// GET /projects/:id - display a specific project
+// http GET url /projects/:id - show one project
 router.get("/:id", async (req, res) => {
   try {
     const oneProject = await db.project.findOne({
